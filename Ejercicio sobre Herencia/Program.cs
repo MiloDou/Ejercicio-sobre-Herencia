@@ -1,127 +1,123 @@
-﻿using Ejercicio_sobre_Herencia;
-using System.ComponentModel.Design;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Herencia
 {
     class Electronicos
     {
-
         static void Main(string[] args)
         {
             Bodega LaBodega = new Bodega();
+
             while (true)
             {
                 try
                 {
                     ShowMenu();
-                    int opcion;
-                    Console.Write("Elige una opcion: ");
-                    opcion = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Elige una opción: ");
+                    int opcion = Convert.ToInt32(Console.ReadLine());
+
                     switch (opcion)
                     {
                         case 1:
-                            {
-                                MenuAdd();
-                            }
+                            MenuAdd(LaBodega);
                             break;
                         case 2:
-                            {
-                                LaBodega.ShowProduct();
-                            }
+                            LaBodega.ShowProduct();
                             break;
                         case 3:
-                            {
-                                LaBodega.SearchProduct();
-                            }
+                            LaBodega.SearchProduct();
                             break;
                         case 4:
-                            {
-                                Exit();
-                            }
+                            Exit();
+                            return; 
+                        default:
+                            Console.WriteLine("Opción no válida. Intente nuevamente.");
                             break;
-
                     }
-
                 }
-                catch (FormatException MessageError)
+                catch (FormatException ex)
                 {
-                    Console.WriteLine("Error encontrado:" + MessageError);
+                    Console.WriteLine("Error encontrado: " + ex.Message);
                 }
-                catch (OverflowException MessageError1)
+                catch (OverflowException ex)
                 {
-                    Console.WriteLine("Error encontrado:" + MessageError1);
+                    Console.WriteLine("Error encontrado: " + ex.Message);
                 }
                 Console.ReadKey();
-
-            } 
+            }
         }
+
         static void ShowMenu()
         {
             Console.Clear();
             Console.WriteLine("-------------------------------");
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("             MENU");
+            Console.WriteLine("             MENÚ");
             Console.ResetColor();
             Console.WriteLine("-------------------------------\n");
             Console.WriteLine("1. Agregar Producto");
-            Console.WriteLine("2. Mostar Producto");
+            Console.WriteLine("2. Mostrar Producto");
             Console.WriteLine("3. Buscar Producto");
             Console.WriteLine("4. Salir");
         }
+
         static void Exit()
         {
             Console.WriteLine("Ciao user...");
             Console.WriteLine("Presiona ENTER para salir");
         }
-        static void MenuAdd()
-        {
-            Bodega LaBodega = new Bodega();
-            {
-                while (true)
-                {
-                    try
-                    {
-                        Console.Clear();
-                        Console.WriteLine("-------------------------------");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("        AGREGAR PRODUCTO");
-                        Console.ResetColor();
-                        Console.WriteLine("-------------------------------\n");
-                        Console.WriteLine("1. Agregar Celular");
-                        Console.WriteLine("2. Agregar Tablet");
-                        Console.WriteLine("3. Agregar Laptop");
-                        Console.Write("Elige una opcion: ");
-                        int option1 = Convert.ToInt32(Console.ReadLine());
-                        switch (option1)
-                        {
-                            case 1:
-                                {
-                                    LaBodega.AddCellphone();
-                                }
-                                break;
-                            case 2:
-                                {
-                                    LaBodega.AddTablet();
-                                }
-                                break;
-                            case 3:
-                                {
-                                    LaBodega.AddLaptop();
-                                }
-                                break;
 
-                        }
-                    }
-                    catch (FormatException MessageError)
+        static void MenuAdd(Bodega LaBodega)
+        {
+            bool continuar = true;
+
+            while (continuar)
+            {
+                try
+                {
+                    Console.Clear();
+                    Console.WriteLine("-------------------------------");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("        AGREGAR PRODUCTO");
+                    Console.ResetColor();
+                    Console.WriteLine("-------------------------------\n");
+                    Console.WriteLine("1. Agregar Celular");
+                    Console.WriteLine("2. Agregar Tablet");
+                    Console.WriteLine("3. Agregar Laptop");
+                    Console.WriteLine("4. Regresar al menú principal");
+                    Console.Write("Elige una opción: ");
+                    int opcion = Convert.ToInt32(Console.ReadLine());
+
+                    switch (opcion)
                     {
-                        Console.WriteLine("Error encontrado:" + MessageError);
+                        case 1:
+                            LaBodega.AddCellphone();
+                            break;
+                        case 2:
+                            LaBodega.AddTablet();
+                            break;
+                        case 3:
+                            LaBodega.AddLaptop();
+                            break;
+                        case 4:
+                            continuar = false;
+                            break;
+                        default:
+                            Console.WriteLine("Opción no válida. Intente nuevamente.");
+                            break;
                     }
-                    catch (OverflowException MessageError1)
-                    {
-                        Console.WriteLine("Error encontrado:" + MessageError1);
-                    }
-                    Console.ReadKey();
-                } 
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine("Error encontrado: " + ex.Message);
+                }
+                catch (OverflowException ex)
+                {
+                    Console.WriteLine("Error encontrado: " + ex.Message);
+                }
+                Console.ReadKey();
             }
         }
     }

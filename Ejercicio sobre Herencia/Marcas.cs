@@ -6,25 +6,30 @@ using System.Threading.Tasks;
 
 namespace Ejercicio_sobre_Herencia
 {
-    public class Marcas
+    public class Marca
     {
-        public int name { get; set; }
-        public int id { get; set; }
+        public List<string> Marcas { get; set; } 
 
-        public Marcas(int name, int id)
+        public Marca()
         {
-            this.name = name;
-            this.id = id;
+            Marcas = new List<string>();
         }
-        
 
-
-
-        public void ShowBrand()
+        public void AddBrand(string brandName)
         {
-
+            Marcas.Add(brandName);
+            Console.WriteLine($"Marca {brandName} agregada correctamente.");
         }
-        
+
+        public void ShowBrands()
+        {
+            Console.WriteLine("Listado de Marcas:");
+            foreach (var marca in Marcas)
+            {
+                Console.WriteLine(marca);
+            }
+        }
     }
-    
 }
+
+
